@@ -30,8 +30,8 @@ function delete_rs(){
 	echo $deploy |awk -F " " '{for(i=1;i<=NF;i++)print $i}' |while read line
 	do
 	    if [ -f rs.txt ];then
-		wordcount=`cat rs.txt|grep ^$line"-"[0-9] |sort -t "," -nr|awk 'NR>4'|wc -l`
-	        rsname=`cat rs.txt|grep ^$line"-"[0-9] |sort -t "," -nr|awk 'NR>4'|cut -d "," -f 1`
+     		wordcount=`cat rs.txt|grep ^$line"-"[0-9] |sort -t "," -k2r|awk 'NR>4'|wc -l`
+        	rsname=`cat rs.txt|grep ^$line"-"[0-9] |sort -t "," -k2r|awk 'NR>4'|cut -d "," -f 1`
                 if [ $wordcount -gt 0 ];then
 		    echo "删除对应deployment:$line下的多余的rs" 
                     echo "$rsname"
